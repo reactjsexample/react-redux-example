@@ -3,6 +3,7 @@ import {IconButton} from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import {withRouter} from 'react-router-dom';
 
+import XxxAppStore from '../../XxxApp/xxxAppStore'
 import styles from './XxxSearchBox.module.scss';
 
 class XxxSearchBox extends Component {
@@ -34,6 +35,12 @@ class XxxSearchBox extends Component {
     if (this.state.isSearchButtonDisabled) {
       return;
     }
+
+    // mapStateToProps(state) {
+    //   const { todos } = state;
+    //   return { todoList: todos.allIds };
+    // }
+
     this.setState({
       isSearchButtonDisabled: true,
       previousSearchText: this.state.searchText
