@@ -1,6 +1,4 @@
-const initialState = {
-  searchText: ""
-};
+const initialState = {};
 
 function xxxAppReducer(state = initialState, action) {
   return state;

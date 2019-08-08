@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+
 import logo from '../../assets/images/logo.svg';
 import styles from './XxxHeader.module.scss';
 import XxxSearchBox from '../XxxSearchBox/XxxSearchBox';

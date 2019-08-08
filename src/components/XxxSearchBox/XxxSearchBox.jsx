@@ -10,7 +10,7 @@ class XxxSearchBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isSearchButtonDisabled: true,
+      isSearchDisabled: true,
       previousSearchText: null,
       searchText: ''
     };
@@ -25,7 +25,7 @@ class XxxSearchBox extends Component {
       // it's ok to do setState in callback of setState
       // Best Practice: don't use this.state in setState, get state from the updater function
       this.setState((state) => {
-        return {isSearchButtonDisabled: ((state.searchText.length === 0) || (state.searchText === state.previousSearchText))}
+        return {isSearchDisabled: ((state.searchText.length === 0) || (state.searchText === state.previousSearchText))}
       });
     });
   }
@@ -42,7 +42,7 @@ class XxxSearchBox extends Component {
     // }
 
     this.setState({
-      isSearchButtonDisabled: true,
+      isSearchDisabled: true,
       previousSearchText: this.state.searchText
     });
     // set search text as parameter in url and navigate to the page that will do the search
