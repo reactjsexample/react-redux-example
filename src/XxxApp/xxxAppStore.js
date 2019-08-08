@@ -1,10 +1,12 @@
-import { createStore, applyMiddleware } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { createStore } from "redux";
+import { devToolsEnhancer } from "redux-devtools-extension";
+
 import xxxAppReducer from "./xxxAppReducer";
 
 const xxxAppStore = createStore(
-  xxxAppReducer /* preloadedState, */ + window.__REDUX_DEVTOOLS_EXTENSION__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION__()
+  xxxAppReducer,
+  /* preloadedState, */ devToolsEnhancer()
+  // Specify name here, actionsBlacklist, actionsCreators and other options if needed
 );
 
 export default xxxAppStore;
