@@ -1,5 +1,5 @@
-import * as actions from "./XxxQuestionsPageActionTypes";
+import * as actionTypes from "./XxxQuestionsPageActionTypes";
 
 export function xxxGetQuestions(payload) {
-  return { type: actions.XXX_GET_QUESTIONS, payload };
+  return { type: actionTypes.GET_QUESTIONS, payload };
 }

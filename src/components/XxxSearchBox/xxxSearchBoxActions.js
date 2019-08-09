@@ -1,25 +1,19 @@
-import * as actions from "./XxxSearchBoxActionTypes";
+import * as actionType from "./XxxSearchBoxActionTypes";
 
-export function xxxGetIsSearchDisabled(payload) {
-  return { type: actions.GET_IS_SEARCH_DISABLED, payload };
-}
+const xxxSetIsSearchDisabled = payload => {
+  return { type: actionType.SET_IS_SEARCH_DISABLED, payload };
+};
 
-export function xxxGetPreviousSearchText(payload) {
-  return { type: actions.GET_PREVIOUS_SEARCH_TEXT, payload };
-}
+const xxxSetPreviousSearchText = payload => {
+  return { type: actionType.SET_PREVIOUS_SEARCH_TEXT, payload };
+};
 
-export function xxxGetSearchText(payload) {
-  return { type: actions.GET_SEARCH_TEXT, payload };
-}
+const xxxSetSearchText = payload => {
+  return { type: actionType.SET_SEARCH_TEXT, payload };
+};
 
-export function xxxSetIsSearchDisabled(payload) {
-  return { type: actions.SET_IS_SEARCH_DISABLED, payload };
-}
-
-export function xxxSetPreviousSearchText(payload) {
-  return { type: actions.SET_PREVIOUS_SEARCH_TEXT, payload };
-}
-
-export function xxxSetSearchText(payload) {
-  return { type: actions.GET_SEARCH_TEXT, payload };
-}
+export default {
+  xxxSetIsSearchDisabled,
+  xxxSetPreviousSearchText,
+  xxxSetSearchText
+};

@@ -1,7 +1,13 @@
-const initialState = {};
+import { combineReducers } from "redux";
 
-function xxxAppReducer(state = initialState, action) {
-  return state;
-}
+import { xxxAnswersPageReducer as answersPage } from "../pages/XxxAnswersPage/XxxAnswersPageReducer";
+import { xxxQuestionsPageReducer as questionsPage } from "../pages/XxxQuestionsPage/XxxQuestionsPageReducer";
+import { xxxSearchBoxReducer as searchBox } from "../components/XxxSearchBox/XxxSearchBoxReducer";
+
+const xxxAppReducer = combineReducers({
+  answersPage,
+  questionsPage,
+  searchBox
+});
 
 export default xxxAppReducer;

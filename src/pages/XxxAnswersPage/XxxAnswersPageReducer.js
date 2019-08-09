@@ -1,4 +1,4 @@
-import * as actions from "./XxxAnswersPageActionTypes";
+import * as actionType from "./XxxAnswersPageActionTypes";
 
 const initialState = {
   answers: [],
@@ -8,17 +8,17 @@ const initialState = {
   question: {}
 };
 
-function xxxAnswersPageReducer(state = initialState, action) {
+const xxxAnswersPageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actions.GET_ANSWERS:
+    case actionType.GET_ANSWERS:
       return { ...state, answers: action.answers };
-    case actions.GET_QUESTION:
+    case actionType.GET_QUESTION:
       return { ...state, question: action.question };
-    case actions.SET_ANSWERS:
+    case actionType.SET_ANSWERS:
       return { ...state, answers: action.answers };
     default:
       return state;
   }
-}
+};
 
-export default xxxAnswersPageReducer;
+export { xxxAnswersPageReducer };

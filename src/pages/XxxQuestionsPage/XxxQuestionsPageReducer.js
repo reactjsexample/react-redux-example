@@ -1,4 +1,4 @@
-import * as actions from "./XxxQuestionsPageActionTypes";
+import * as actionType from "./XxxQuestionsPageActionTypes";
 
 const initialState = {
   questionsCurrentPage: "",
@@ -9,13 +9,13 @@ const initialState = {
   questions: []
 };
 
-function xxxQuestionsPageReducer(state = initialState, action) {
+const xxxQuestionsPageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actions.XXX_GET_QUESTIONS:
+    case actionType.GET_QUESTIONS:
       return { ...state, questions: action.questions };
     default:
       return state;
   }
-}
+};
 
-export default xxxQuestionsPageReducer;
+export { xxxQuestionsPageReducer };
