@@ -133,7 +133,11 @@ Start by reading [Create a New React App](https://reactjs.org/docs/create-a-new-
 
 If you use the [Create React App](https://reactjs.org/docs/create-a-new-react-app.html#create-react-app) command, it will install the React library packages.
 
-#### Install React Redux
+#### Install Redux
+
+There are several packages you will need to install Redux.
+
+##### Install React Redux
 
 [React Redux](https://react-redux.js.org/) is Redux for React.
 
@@ -143,7 +147,15 @@ You need to install both **Redux** and **React Redux**.
 
 `npm i -s react-redux`
 
-#### Install Redux Devtools
+##### Install Redux Thunk
+
+[Redux Thunk](https://github.com/reduxjs/redux-thunk) is required to use any kind of asynchronous data or events with the store.
+
+`npm i -s redux-thunk`
+
+See the documentation on **Redux Thunk** to see how to add it when creating the store.
+
+##### Install Redux Devtools
 
 [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) is a Chrome Extension.
 You need that for debugging with Redux.
@@ -151,8 +163,6 @@ You need that for debugging with Redux.
 Install it from your Chrome browser.
 
 You will need to modify your code to use this properly.
-
-First, follow [these instructions](https://github.com/zalmoxisus/redux-devtools-extension#11-basic-store) to modify your store definition.
 
 **Note**: You should also install the library package.
 

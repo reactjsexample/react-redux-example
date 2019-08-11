@@ -2,23 +2,27 @@ import * as actionType from "./XxxAnswersPageActionTypes";
 
 const initialState = {
   answers: [],
-  isAnswersEmpty: false,
-  isAnswersError: false,
-  isAnswersLoading: true,
+  isEmpty: false,
+  isError: false,
+  isLoading: true,
   question: {}
 };
 
-const xxxAnswersPageReducer = (state = initialState, action) => {
+const answersPageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionType.GET_ANSWERS:
-      return { ...state, answers: action.answers };
-    case actionType.GET_QUESTION:
-      return { ...state, question: action.question };
     case actionType.SET_ANSWERS:
-      return { ...state, answers: action.answers };
+      return { ...state, answers: action.payload };
+    case actionType.SET_IS_EMPTY:
+      return { ...state, isEmpty: action.payload };
+    case actionType.SET_IS_ERROR:
+      return { ...state, isError: action.payload };
+    case actionType.SET_IS_LOADING:
+      return { ...state, isLoading: action.payload };
+    case actionType.SET_QUESTION:
+      return { ...state, question: action.payload };
     default:
       return state;
   }
 };
 
-export { xxxAnswersPageReducer };
+export { answersPageReducer };
