@@ -1,19 +1,16 @@
 import * as actionType from "./XxxSearchBoxActionTypes";
 
-const xxxSetIsSearchDisabled = payload => {
-  return { type: actionType.SET_IS_SEARCH_DISABLED, payload };
-};
+export const setIsSearchDisabled = data => ({
+  type: actionType.SET_IS_SEARCH_DISABLED,
+  payload: data
+});
 
-const xxxSetPreviousSearchText = payload => {
-  return { type: actionType.SET_PREVIOUS_SEARCH_TEXT, payload };
-};
+export const setPreviousSearchText = data => ({
+  type: actionType.SET_PREVIOUS_SEARCH_TEXT,
+  payload: data
+});
 
-const xxxSetSearchText = payload => {
-  return { type: actionType.SET_SEARCH_TEXT, payload };
-};
-
-export default {
-  xxxSetIsSearchDisabled,
-  xxxSetPreviousSearchText,
-  xxxSetSearchText
-};
+export const setSearchText = data => ({
+  type: actionType.SET_SEARCH_TEXT,
+  payload: data
+});
