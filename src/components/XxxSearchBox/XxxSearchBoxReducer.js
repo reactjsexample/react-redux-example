@@ -6,17 +6,17 @@ const initialState = {
   searchText: ""
 };
 
-const xxxSearchBoxReducer = (state = initialState, action) => {
+const searchBoxReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionType.SET_IS_SEARCH_DISABLED:
-      return { ...state, isSearchDisabled: action.isSearchDisabled };
+      return { ...state, isSearchDisabled: action.payload };
     case actionType.SET_PREVIOUS_SEARCH_TEXT:
-      return { ...state, previousSearchText: action.previousSearchText };
+      return { ...state, previousSearchText: action.payload };
     case actionType.SET_SEARCH_TEXT:
-      return { ...state, searchText: action.searchText };
+      return { ...state, searchText: action.payload };
     default:
       return state;
   }
 };
 
-export { xxxSearchBoxReducer };
+export { searchBoxReducer };
