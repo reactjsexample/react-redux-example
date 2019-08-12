@@ -113,81 +113,73 @@ class XxxQuestionsPage extends Component {
           <CircularProgress />
         </div>
       );
-    }
-
-    if (this.props.isError) {
-      pageView = (
-        <div className={sharedStyles.pageMessageContainer}>
-          <div className={sharedStyles.pageMessageError}>
-            Error Occurred Getting Questions
-          </div>
-        </div>
-      );
-    }
-
-    if (this.props.isEmpty) {
-      pageView = (
-        <div className={sharedStyles.pageMessageContainer}>
-          <div className={sharedStyles.pageMessageWarning}>
-            No Questions Found
-          </div>
-        </div>
-      );
-    }
-
-    if (typeof this.props.questions !== "undefined") {
-      pageView = <h1>got questions</h1>;
     } else {
-      pageView = <h1>got no questions</h1>;
-    }
-
-    if (this.props.x) {
-      pageView = (
-        <div>
-          <ul>
-            {this.props.questions.map(item => (
-              <li key={item.question_id}>
-                <a
-                  href={"/answers/" + item.question_id}
-                  className={styles.dummy}
-                  key={item.question_id}
-                >
-                  {this.decodeHtmlEntities(item.title)}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <div className={styles.pageFooter}>
-            <div className={styles.pageNavigationPanel}>
-              <span>Page {this.props.currentPage}</span>
-              <IconButton
-                disabled={this.props.currentPage === "1"}
-                onClick={this.handleFirstPage}
-                href="#"
-                title="Go to First Page"
-              >
-                <FirstPageIcon />
-              </IconButton>
-              <IconButton
-                disabled={this.props.currentPage === "1"}
-                onClick={this.handlePreviousPage}
-                href="#"
-                title="Go to Previous Page"
-              >
-                <ChevronLeftIcon />
-              </IconButton>
-              <IconButton
-                disabled={!this.props.isMorePages}
-                onClick={this.handleNextPage}
-                href="#"
-                title="Go to Next Page"
-              >
-                <ChevronRightIcon />
-              </IconButton>
+      if (this.props.isError) {
+        pageView = (
+          <div className={sharedStyles.pageMessageContainer}>
+            <div className={sharedStyles.pageMessageError}>
+              Error Occurred Getting Questions
             </div>
           </div>
-        </div>
-      );
+        );
+      } else {
+        if (this.props.isEmpty) {
+          pageView = (
+            <div className={sharedStyles.pageMessageContainer}>
+              <div className={sharedStyles.pageMessageWarning}>
+                No Questions Found
+              </div>
+            </div>
+          );
+        } else if (typeof this.props.questions != "undefined") {
+          pageView = (
+            <div>
+              <ul>
+                {this.props.questions.map(item => (
+                  <li key={item.question_id}>
+                    <a
+                      href={"/answers/" + item.question_id}
+                      className={styles.dummy}
+                      key={item.question_id}
+                    >
+                      {this.decodeHtmlEntities(item.title)}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <div className={styles.pageFooter}>
+                <div className={styles.pageNavigationPanel}>
+                  <span>Page {this.props.currentPage}</span>
+                  <IconButton
+                    disabled={this.props.currentPage === "1"}
+                    onClick={this.handleFirstPage}
+                    href="#"
+                    title="Go to First Page"
+                  >
+                    <FirstPageIcon />
+                  </IconButton>
+                  <IconButton
+                    disabled={this.props.currentPage === "1"}
+                    onClick={this.handlePreviousPage}
+                    href="#"
+                    title="Go to Previous Page"
+                  >
+                    <ChevronLeftIcon />
+                  </IconButton>
+                  <IconButton
+                    disabled={!this.props.isMorePages}
+                    onClick={this.handleNextPage}
+                    href="#"
+                    title="Go to Next Page"
+                  >
+                    <ChevronRightIcon />
+                  </IconButton>
+                </div>
+              </div>
+            </div>
+          );
+        }
+      }
     }
 
     return (
