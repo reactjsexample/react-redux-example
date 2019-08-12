@@ -30,14 +30,22 @@ const questionsPageReducer = (state = initialState, action) => {
         questions: []
       };
     case actionType.FETCH_QUESTIONS_SUCCESS:
+      console.log(action.payload);
+      let isEmpty =
+        !action.payload.data.hasOwnProperty("items") ||
+        !(
+          Array.isArray(action.payload.data.items) &&
+          action.payload.data.items.length > 0
+        );
       return {
         ...state,
-        currentPage: action.payload.currentPage,
-        isEmpty: action.payload.isEmpty,
+        isEmpty: isEmpty,
         isError: false,
         isLoading: false,
-        isMore: action.payload.is_more,
-        questions: action.payload.items
+        isMore:
+          action.payload.data.hasOwnProperty("has_more") &&
+          action.payload.data.has_more,
+        questions: !isEmpty ? action.payload.data.items : []
       };
     default:
       return state;
