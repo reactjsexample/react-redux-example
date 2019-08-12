@@ -36,8 +36,8 @@ const questionsPageReducer = (state = initialState, action) => {
         isEmpty: action.payload.isEmpty,
         isError: false,
         isLoading: false,
-        isMore: action.payload.isMore,
-        questions: action.payload.questions
+        isMore: action.payload.is_more,
+        questions: action.payload.items
       };
     default:
       return state;

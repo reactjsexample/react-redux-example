@@ -58,7 +58,7 @@ class XxxQuestionsPage extends Component {
       sort: "votes"
     };
     const url = baseUrl + "?" + this.getQueryString(requestParams);
-    getQuestionsFromUrl(url);
+    this.props.getQuestionsFromUrl(url);
   }
 
   getQueryString(params) {
@@ -199,6 +199,10 @@ class XxxQuestionsPage extends Component {
   }
 }
 
+const mapDispatchToProps = {
+  getQuestionsFromUrl
+};
+
 const mapStateToProps = state => ({
   currentPage: state.currentPage,
   isEmpty: state.isEmpty,
@@ -208,4 +212,9 @@ const mapStateToProps = state => ({
   questions: state.questions
 });
 
-export default withRouter(connect(mapStateToProps)(XxxQuestionsPage));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(XxxQuestionsPage)
+);
