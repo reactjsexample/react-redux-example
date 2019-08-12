@@ -11,20 +11,34 @@ const initialState = {
 
 const questionsPageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionType.SET_CURRENT_PAGE:
-      return { ...state, currentPage: action.payload };
-    case actionType.SET_IS_EMPTY:
-      return { ...state, isEmpty: action.payload };
-    case actionType.SET_IS_ERROR:
-      return { ...state, isError: action.payload };
-    case actionType.SET_IS_LOADING:
-      return { ...state, isLoading: action.payload };
-    case actionType.SET_IS_MORE:
-      return { ...state, isMore: action.payload };
-    case actionType.SET_IS_QUESTIONS:
-      return { ...state, isQuestions: action.payload };
-    case actionType.SET_QUESTIONS:
-      return { ...state, questions: action.payload };
+    case actionType.FETCH_QUESTIONS:
+      return {
+        ...state,
+        isEmpty: false,
+        isError: false,
+        isLoading: true,
+        isMore: false,
+        questions: []
+      };
+    case actionType.FETCH_QUESTIONS_FAILURE:
+      return {
+        ...state,
+        isEmpty: false,
+        isError: true,
+        isLoading: false,
+        isMore: false,
+        questions: []
+      };
+    case actionType.FETCH_QUESTIONS_SUCCESS:
+      return {
+        ...state,
+        currentPage: action.payload.currentPage,
+        isEmpty: action.payload.isEmpty,
+        isError: false,
+        isLoading: false,
+        isMore: action.payload.isMore,
+        questions: action.payload.questions
+      };
     default:
       return state;
   }

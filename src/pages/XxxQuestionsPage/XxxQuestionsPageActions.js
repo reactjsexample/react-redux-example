@@ -1,36 +1,30 @@
 import * as actionTypes from "./XxxQuestionsPageActionTypes";
 
-export const setCurrentPage = data => ({
-  type: actionTypes.SET_CURRENT_PAGE,
-  payload: data
+export const getQuestionsFromUrl = url => {
+  return dispatch => {
+    dispatch(fetchQuestions());
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
+      .then(response => response.json())
+      .then(data => dispatch(fetchQuestionsSuccess(data)))
+      .catch(() => dispatch(fetchQuestionsFailure()));
+  };
+};
+
+export const fetchQuestions = () => ({
+  type: actionTypes.FETCH_QUESTIONS
 });
 
-export const setIsEmpty = data => ({
-  type: actionTypes.SET_IS_EMPTY,
-  payload: data
+export const fetchQuestionsFailure = data => ({
+  type: actionTypes.FETCH_QUESTIONS_FAILURE
 });
 
-export const setIsError = data => ({
-  type: actionTypes.SET_IS_ERROR,
-  payload: data
-});
-
-export const setIsLoading = data => ({
-  type: actionTypes.SET_IS_LOADING,
-  payload: data
-});
-
-export const setIsMore = data => ({
-  type: actionTypes.SET_IS_MORE,
-  payload: data
-});
-
-export const setIsQuestions = data => ({
-  type: actionTypes.SET_IS_QUESTIONS,
-  payload: data
-});
-
-export const setQuestions = data => ({
-  type: actionTypes.SET_QUESTIONS,
-  payload: data
+export const fetchQuestionsSuccess = data => ({
+  type: actionTypes.FETCH_QUESTIONS_SUCCESS,
+  payload: { data }
 });

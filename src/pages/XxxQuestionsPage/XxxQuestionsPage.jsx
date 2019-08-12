@@ -7,15 +7,7 @@ import FirstPageIcon from "@material-ui/icons/FirstPage";
 import queryString from "query-string";
 import { withRouter } from "react-router-dom";
 
-import {
-  setCurrentPage,
-  setIsEmpty,
-  setIsError,
-  setIsLoading,
-  setIsMore,
-  setIsQuestions,
-  setQuestions
-} from "./XxxQuestionsPageActions";
+import { getQuestionsFromUrl } from "./XxxQuestionsPageActions";
 import sharedStyles from "../../assets/styles/XxxSharedStyles.module.scss";
 import styles from "./XxxQuestionsPage.module.scss";
 
@@ -54,10 +46,6 @@ class XxxQuestionsPage extends Component {
   }
 
   getQuestions() {
-    this.props.setIsEmpty(false);
-    this.props.setIsError(false);
-    this.props.setIsLoading(true);
-    this.props.setQuestions([]);
     const baseUrl = "https://api.stackexchange.com/2.2/search/advanced";
     const requestParams = {
       key: "U4DMV*8nvpm3EOpvf69Rxw((",
@@ -70,35 +58,7 @@ class XxxQuestionsPage extends Component {
       sort: "votes"
     };
     const url = baseUrl + "?" + this.getQueryString(requestParams);
-    const thisRef = this;
-    fetch(url)
-      .then(function(response) {
-        if (response.status !== 200) {
-          thisRef.props.setIsError(true);
-          thisRef.props.setIsLoading(false);
-          return;
-        }
-        response.json().then(data => {
-          if (
-            typeof data === "object" &&
-            data.hasOwnProperty("items") &&
-            Array.isArray(data.items) &&
-            data.items.length > 0
-          ) {
-            thisRef.props.setCurrentPage(requestParams.page);
-            //thisRef.props.setIsLoading(false);
-            thisRef.props.setIsMore(data.has_more);
-            thisRef.props.setQuestions(data.items);
-          } else {
-            thisRef.props.setIsEmpty(true);
-            thisRef.props.setIsLoading(false);
-          }
-        });
-      })
-      .catch(function(err) {
-        thisRef.props.setIsError(true);
-        thisRef.props.setIsLoading(false);
-      });
+    getQuestionsFromUrl(url);
   }
 
   getQueryString(params) {
@@ -146,6 +106,7 @@ class XxxQuestionsPage extends Component {
 
   render() {
     let pageView = null;
+
     if (this.props.isLoading) {
       pageView = (
         <div className={sharedStyles.pageMessageContainer}>
@@ -153,6 +114,7 @@ class XxxQuestionsPage extends Component {
         </div>
       );
     }
+
     if (this.props.isError) {
       pageView = (
         <div className={sharedStyles.pageMessageContainer}>
@@ -162,6 +124,7 @@ class XxxQuestionsPage extends Component {
         </div>
       );
     }
+
     if (this.props.isEmpty) {
       pageView = (
         <div className={sharedStyles.pageMessageContainer}>
@@ -171,8 +134,14 @@ class XxxQuestionsPage extends Component {
         </div>
       );
     }
-    // if (!(this.props.isEmpty || this.props.isError || this.props.isLoading)) {
-    if (false) {
+
+    if (typeof this.props.questions !== "undefined") {
+      pageView = <h1>got questions</h1>;
+    } else {
+      pageView = <h1>got no questions</h1>;
+    }
+
+    if (this.props.x) {
       pageView = (
         <div>
           <ul>
@@ -230,16 +199,6 @@ class XxxQuestionsPage extends Component {
   }
 }
 
-const mapDispatchToProps = {
-  setCurrentPage,
-  setIsEmpty,
-  setIsError,
-  setIsLoading,
-  setIsMore,
-  setIsQuestions,
-  setQuestions
-};
-
 const mapStateToProps = state => ({
   currentPage: state.currentPage,
   isEmpty: state.isEmpty,
@@ -249,9 +208,4 @@ const mapStateToProps = state => ({
   questions: state.questions
 });
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(XxxQuestionsPage)
-);
+export default withRouter(connect(mapStateToProps)(XxxQuestionsPage));
