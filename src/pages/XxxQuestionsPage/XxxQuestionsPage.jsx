@@ -21,11 +21,13 @@ class XxxQuestionsPage extends Component {
     this.handleFirstPage = this.handleFirstPage.bind(this);
     this.handleNextPage = this.handleNextPage.bind(this);
     this.handlePreviousPage = this.handlePreviousPage.bind(this);
+    this.handleTest = this.handleTest.bind(this);
   }
 
   componentDidMount() {
     this.readUrlQueryString(this.props.location.search);
     this.getQuestions();
+    console.log("props", this.props);
   }
 
   componentWillMount() {
@@ -92,6 +94,10 @@ class XxxQuestionsPage extends Component {
   handlePreviousPage() {
     this.requestedPage = (parseInt(this.props.currentPage, 10) - 1).toString();
     this.navigateToPage();
+  }
+
+  handleTest() {
+    console.log("props", this.props);
   }
 
   navigateToPage() {
@@ -186,6 +192,7 @@ class XxxQuestionsPage extends Component {
       <div className={sharedStyles.page}>
         <div className={sharedStyles.pageTitle}>Stack Exchange Questions</div>
         <div className={sharedStyles.mainCard}>{pageView}</div>
+        <button onClick={this.handleTest}>test</button>
       </div>
     );
   }

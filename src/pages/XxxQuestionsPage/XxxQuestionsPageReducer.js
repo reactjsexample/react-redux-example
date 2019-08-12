@@ -41,7 +41,7 @@ const questionsPageReducer = (state = initialState, action) => {
         ...state,
         isEmpty: isEmpty,
         isError: false,
-        isLoading: false,
+        isLoading: true,
         isMore:
           action.payload.data.hasOwnProperty("has_more") &&
           action.payload.data.has_more,
