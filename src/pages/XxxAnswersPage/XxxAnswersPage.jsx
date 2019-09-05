@@ -3,11 +3,11 @@ import { CircularProgress } from "@material-ui/core";
 import { connect } from "react-redux";
 
 import {
-  getAnswers,
-  getIsLoading,
-  getIsError,
-  getIsEmpty,
-  getQuestion
+  selectAnswers,
+  selectIsLoading,
+  selectIsError,
+  selectIsEmpty,
+  selectQuestion
 } from "./XxxAnswersPageReducer";
 import {
   getAnswersFromUrl,
@@ -203,11 +203,11 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = state => ({
-  answers: getAnswers(state),
-  isEmpty: getIsEmpty(state),
-  isError: getIsError(state),
-  isLoading: getIsLoading(state),
-  question: getQuestion(state)
+  answers: selectAnswers(state),
+  isEmpty: selectIsEmpty(state),
+  isError: selectIsError(state),
+  isLoading: selectIsLoading(state),
+  question: selectQuestion(state)
 });
 
 export default connect(

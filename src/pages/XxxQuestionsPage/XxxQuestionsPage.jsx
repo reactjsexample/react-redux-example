@@ -8,12 +8,12 @@ import queryString from "query-string";
 import { withRouter } from "react-router-dom";
 
 import {
-  getCurrentPage,
-  getIsEmpty,
-  getIsError,
-  getIsLoading,
-  getIsMore,
-  getQuestions
+  selectCurrentPage,
+  selectIsEmpty,
+  selectIsError,
+  selectIsLoading,
+  selectIsMore,
+  selectQuestions
 } from "./XxxQuestionsPageReducer";
 import { getQuestionsFromUrl } from "./XxxQuestionsPageActions";
 import sharedStyles from "../../assets/styles/XxxSharedStyles.module.scss";
@@ -204,12 +204,12 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = state => ({
-  currentPage: getCurrentPage(state),
-  isEmpty: getIsEmpty(state),
-  isError: getIsError(state),
-  isLoading: getIsLoading(state),
-  isMore: getIsMore(state),
-  questions: getQuestions(state)
+  currentPage: selectCurrentPage(state),
+  isEmpty: selectIsEmpty(state),
+  isError: selectIsError(state),
+  isLoading: selectIsLoading(state),
+  isMore: selectIsMore(state),
+  questions: selectQuestions(state)
 });
 
 export default withRouter(
