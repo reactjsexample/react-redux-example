@@ -20,3 +20,9 @@ const searchBoxReducer = (state = initialState, action) => {
 };
 
 export { searchBoxReducer };
+
+// Selectors
+export const selectIsSearchDisabled = state => state.searchBox.isSearchDisabled;
+export const selectPreviousSearchText = state =>
+  state.searchBox.previousSearchText;
+export const selectSearchText = state => state.searchBox.searchText;

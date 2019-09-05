@@ -4,6 +4,11 @@ import { IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { withRouter } from "react-router-dom";
 
+import {
+  selectIsSearchDisabled,
+  selectPreviousSearchText,
+  selectSearchText
+} from "./XxxSearchBoxReducer";
 import styles from "./XxxSearchBox.module.scss";
 import {
   setIsSearchDisabled,
@@ -73,9 +78,9 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = state => ({
-  isSearchDisabled: state.searchBox.isSearchDisabled,
-  previousSearchText: state.searchBox.previousSearchText,
-  searchText: state.searchBox.searchText
+  isSearchDisabled: selectIsSearchDisabled(state),
+  previousSearchText: selectPreviousSearchText(state),
+  searchText: selectSearchText(state)
 });
 
 export default withRouter(
