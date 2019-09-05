@@ -1,24 +1,18 @@
 import React, { Component } from "react";
 import { CircularProgress } from "@material-ui/core";
+import { connect } from "react-redux";
 import styles from "./XxxAnswersPage.module.scss";
 import sharedStyles from "../../assets/styles/XxxSharedStyles.module.scss";
+import {
+  getAnswersFromUrl,
+  getQuestionFromUrl
+} from "../XxxAnswersPage/XxxAnswersPageActions";
 
 class XxxAnswersPage extends Component {
   // BEST PRACTICE: declare all private properties at the top
   questionId = "";
   requestUrl = "";
   requestParams = "";
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      answers: [],
-      isEmpty: false,
-      isError: false,
-      isLoading: true,
-      question: {}
-    };
-  }
 
   componentDidMount() {
     this.getQuestionId();
@@ -57,81 +51,13 @@ class XxxAnswersPage extends Component {
       sort: "votes"
     };
     const url = this.requestUrl + "?" + this.getQueryString(this.requestParams);
-    const thisRef = this;
-    fetch(url)
-      .then(function(response) {
-        if (response.status !== 200) {
-          thisRef.setState({
-            isError: true,
-            isLoading: false
-          });
-          return;
-        }
-        response.json().then(data => {
-          if (
-            typeof data === "object" &&
-            data.hasOwnProperty("items") &&
-            Array.isArray(data.items) &&
-            data.items.length > 0
-          ) {
-            thisRef.setState({
-              question: data.items[0]
-            });
-            thisRef.getAnswers();
-          } else {
-            thisRef.setState({
-              isEmpty: true,
-              isLoading: false
-            });
-          }
-        });
-      })
-      .catch(function(err) {
-        thisRef.setState({
-          isError: true,
-          isLoading: false
-        });
-      });
+    this.props.getQuestionFromUrl(url);
   }
 
   getAnswers() {
     this.requestUrl += "/answers";
     const url = this.requestUrl + "?" + this.getQueryString(this.requestParams);
-    const thisRef = this;
-    fetch(url)
-      .then(function(response) {
-        if (response.status !== 200) {
-          thisRef.setState({
-            isError: true,
-            isLoading: false
-          });
-          return;
-        }
-        response.json().then(data => {
-          if (
-            typeof data === "object" &&
-            data.hasOwnProperty("items") &&
-            Array.isArray(data.items) &&
-            data.items.length > 0
-          ) {
-            thisRef.setState({
-              answers: data.items,
-              isLoading: false
-            });
-          } else {
-            thisRef.setState({
-              isEmpty: true,
-              isLoading: false
-            });
-          }
-        });
-      })
-      .catch(function(err) {
-        thisRef.setState({
-          isError: true,
-          isLoading: false
-        });
-      });
+    this.props.getAnswersFromUrl(url);
   }
 
   getQueryString(params) {
@@ -164,14 +90,14 @@ class XxxAnswersPage extends Component {
 
   render() {
     let pageView = null;
-    if (this.state.isLoading) {
+    if (this.props.isLoading) {
       pageView = (
         <div className={sharedStyles.pageMessageContainer}>
           <CircularProgress />
         </div>
       );
     }
-    if (this.state.isError) {
+    if (this.props.isError) {
       pageView = (
         <div className={sharedStyles.pageMessageContainer}>
           <div className={sharedStyles.pageMessageError}>
@@ -180,7 +106,7 @@ class XxxAnswersPage extends Component {
         </div>
       );
     }
-    if (this.state.isEmpty) {
+    if (this.props.isEmpty) {
       pageView = (
         <div className={sharedStyles.pageMessageContainer}>
           <div className={sharedStyles.pageMessageWarning}>
@@ -189,43 +115,43 @@ class XxxAnswersPage extends Component {
         </div>
       );
     }
-    if (!(this.state.isEmpty || this.state.isError || this.state.isLoading)) {
+    if (!(this.props.isEmpty || this.props.isError || this.props.isLoading)) {
       pageView = (
         <div className={styles.answersContainer}>
           <div className={styles.answerQuestionContainer}>
             <div className={styles.questionTitle}>
-              {this.decodeHtmlEntities(this.state.question.title)}
+              {this.decodeHtmlEntities(this.props.question.title)}
             </div>
             <div>
               <span className={styles.questionCaption}>Number of Views: </span>
               <span className={styles.questionInfo}>
-                {this.state.question.view_count}
+                {this.props.question.view_count}
               </span>
             </div>
             <div>
               <span className={styles.questionCaption}>Score: </span>
               <span className={styles.questionInfo}>
-                {this.state.question.score}
+                {this.props.question.score}
               </span>
             </div>
             <div>
               <span className={styles.questionCaption}>Tags: </span>
               <span className={styles.questionInfo}>
-                {this.state.question.tags.join()}
+                {this.props.question.tags.join()}
               </span>
             </div>
             <div>
               <span className={styles.questionCaption}>Asked: </span>
               <span className={styles.questionInfo}>
-                {this.timeToShortDate(this.state.question.creation_date)}
+                {this.timeToShortDate(this.props.question.creation_date)}
               </span>
             </div>
             <div
               className={styles.questionBody}
-              dangerouslySetInnerHTML={{ __html: this.state.question.body }}
+              dangerouslySetInnerHTML={{ __html: this.props.question.body }}
             ></div>
           </div>
-          {this.state.answers.map(item => (
+          {this.props.answers.map(item => (
             <div
               className={
                 item.is_accepted
@@ -263,4 +189,20 @@ class XxxAnswersPage extends Component {
   }
 }
 
-export default XxxAnswersPage;
+const mapDispatchToProps = {
+  getQuestionFromUrl,
+  getAnswersFromUrl
+};
+
+const mapStateToProps = state => ({
+  answers: state.answersPage.answers,
+  isEmpty: state.answersPage.isEmpty,
+  isError: state.answersPage.isError,
+  isLoading: state.answersPage.isLoading,
+  question: state.answersPage.question
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(XxxAnswersPage);
