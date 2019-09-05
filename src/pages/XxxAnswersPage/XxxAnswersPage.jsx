@@ -1,12 +1,20 @@
 import React, { Component } from "react";
 import { CircularProgress } from "@material-ui/core";
 import { connect } from "react-redux";
-import styles from "./XxxAnswersPage.module.scss";
-import sharedStyles from "../../assets/styles/XxxSharedStyles.module.scss";
+
+import {
+  getAnswers,
+  getIsLoading,
+  getIsError,
+  getIsEmpty,
+  getQuestion
+} from "./XxxAnswersPageReducer";
 import {
   getAnswersFromUrl,
   getQuestionFromUrl
 } from "../XxxAnswersPage/XxxAnswersPageActions";
+import styles from "./XxxAnswersPage.module.scss";
+import sharedStyles from "../../assets/styles/XxxSharedStyles.module.scss";
 
 class XxxAnswersPage extends Component {
   // BEST PRACTICE: declare all private properties at the top
@@ -195,11 +203,11 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = state => ({
-  answers: state.answersPage.answers,
-  isEmpty: state.answersPage.isEmpty,
-  isError: state.answersPage.isError,
-  isLoading: state.answersPage.isLoading,
-  question: state.answersPage.question
+  answers: getAnswers(state),
+  isEmpty: getIsEmpty(state),
+  isError: getIsError(state),
+  isLoading: getIsLoading(state),
+  question: getQuestion(state)
 });
 
 export default connect(
