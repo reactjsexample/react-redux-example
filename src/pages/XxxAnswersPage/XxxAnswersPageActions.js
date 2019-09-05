@@ -1,18 +1,20 @@
 import * as actionTypes from "./XxxAnswersPageActionTypes";
 
 export const getAnswersFromUrl = url => {
-  return dispatch => {
-    dispatch(fetchAnswers());
-    fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response;
-      })
-      .then(response => response.json())
-      .then(data => dispatch(fetchAnswersSuccess(data)))
-      .catch(() => dispatch(fetchAnswersFailure()));
+  return async dispatch => {
+    try {
+      dispatch(fetchAnswers());
+      let response = await fetch(url);
+      if (response.ok) {
+        response = await response.json();
+        dispatch(fetchAnswersSuccess(response));
+      } else {
+        dispatch(fetchAnswersFailure());
+      }
+      return response;
+    } catch (e) {
+      dispatch(fetchAnswersFailure());
+    }
   };
 };
 
@@ -30,18 +32,21 @@ export const fetchAnswersSuccess = data => ({
 });
 
 export const getQuestionFromUrl = url => {
-  return dispatch => {
-    dispatch(fetchQuestion());
-    fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response;
-      })
-      .then(response => response.json())
-      .then(data => dispatch(fetchQuestionSuccess(data)))
-      .catch(() => dispatch(fetchQuestionFailure()));
+  return async dispatch => {
+    try {
+      dispatch(fetchQuestion());
+      let response = await fetch(url);
+      if (response.ok) {
+        response = await response.json();
+        dispatch(fetchQuestionSuccess(response));
+      } else {
+        dispatch(fetchQuestionFailure());
+      }
+      return response;
+    } catch (e) {
+      dispatch(fetchQuestionFailure());
+      return e;
+    }
   };
 };
 

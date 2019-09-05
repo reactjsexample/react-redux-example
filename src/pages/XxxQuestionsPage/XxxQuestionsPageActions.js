@@ -1,18 +1,21 @@
 import * as actionTypes from "./XxxQuestionsPageActionTypes";
 
 export const getQuestionsFromUrl = url => {
-  return dispatch => {
-    dispatch(fetchQuestions());
-    fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response;
-      })
-      .then(response => response.json())
-      .then(data => dispatch(fetchQuestionsSuccess(data)))
-      .catch(() => dispatch(fetchQuestionsFailure()));
+  return async dispatch => {
+    try {
+      dispatch(fetchQuestions());
+      let response = await fetch(url);
+      if (response.ok) {
+        response = await response.json();
+        dispatch(fetchQuestionsSuccess(response));
+      } else {
+        dispatch(fetchQuestionsFailure());
+      }
+      return response;
+    } catch (e) {
+      dispatch(fetchQuestionsFailure());
+      return e;
+    }
   };
 };
 
