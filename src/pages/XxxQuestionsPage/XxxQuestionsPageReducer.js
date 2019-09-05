@@ -52,3 +52,11 @@ const questionsPageReducer = (state = initialState, action) => {
 };
 
 export { questionsPageReducer };
+
+// Redux selectors
+export const getCurrentPage = state => state.questionsPage.currentPage;
+export const getIsEmpty = state => state.questionsPage.isEmpty;
+export const getIsError = state => state.questionsPage.isError;
+export const getIsLoading = state => state.questionsPage.isLoading;
+export const getIsMore = state => state.questionsPage.isMore;
+export const getQuestions = state => state.questionsPage.questions;

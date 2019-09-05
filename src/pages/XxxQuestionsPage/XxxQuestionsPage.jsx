@@ -7,6 +7,14 @@ import FirstPageIcon from "@material-ui/icons/FirstPage";
 import queryString from "query-string";
 import { withRouter } from "react-router-dom";
 
+import {
+  getCurrentPage,
+  getIsEmpty,
+  getIsError,
+  getIsLoading,
+  getIsMore,
+  getQuestions
+} from "./XxxQuestionsPageReducer";
 import { getQuestionsFromUrl } from "./XxxQuestionsPageActions";
 import sharedStyles from "../../assets/styles/XxxSharedStyles.module.scss";
 import styles from "./XxxQuestionsPage.module.scss";
@@ -196,12 +204,12 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = state => ({
-  currentPage: state.questionsPage.currentPage,
-  isEmpty: state.questionsPage.isEmpty,
-  isError: state.questionsPage.isError,
-  isLoading: state.questionsPage.isLoading,
-  isMore: state.questionsPage.isMore,
-  questions: state.questionsPage.questions
+  currentPage: getCurrentPage(state),
+  isEmpty: getIsEmpty(state),
+  isError: getIsError(state),
+  isLoading: getIsLoading(state),
+  isMore: getIsMore(state),
+  questions: getQuestions(state)
 });
 
 export default withRouter(
