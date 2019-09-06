@@ -11,7 +11,7 @@ import XxxQuestionsPage from "../pages/XxxQuestionsPage/XxxQuestionsPage";
 function XxxApp() {
   return (
     <div className={styles.xxxApp}>
-      <Router basename={"/react-redux-example"}>
+      <Router basename={process.env.PUBLIC_URL}>
         <XxxHeader />
         <div>
           <Switch>
