@@ -148,7 +148,9 @@ class XxxQuestionsPage extends Component {
                   <li key={item.question_id}>
                     <a
                       href={
-                        process.env.PUBLIC_URL + "/answers/" + item.question_id
+                        process.env.PUBLIC_URL +
+                        "/#/answers/" +
+                        item.question_id
                       }
                       className={styles.dummy}
                       key={item.question_id}
