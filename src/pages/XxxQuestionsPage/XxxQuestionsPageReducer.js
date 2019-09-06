@@ -46,6 +46,8 @@ const questionsPageReducer = (state = initialState, action) => {
           action.payload.data.has_more,
         questions: !isEmpty ? action.payload.data.items : []
       };
+    case actionType.SET_CURRENT_PAGE:
+      return { ...state, currentPage: action.payload.data };
     default:
       return state;
   }
@@ -53,7 +55,6 @@ const questionsPageReducer = (state = initialState, action) => {
 
 export { questionsPageReducer };
 
-// Redux selectors
 export const selectCurrentPage = state => state.questionsPage.currentPage;
 export const selectIsEmpty = state => state.questionsPage.isEmpty;
 export const selectIsError = state => state.questionsPage.isError;

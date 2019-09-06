@@ -15,7 +15,7 @@ import {
   selectIsMore,
   selectQuestions
 } from "./XxxQuestionsPageReducer";
-import { getQuestionsFromUrl } from "./XxxQuestionsPageActions";
+import { getQuestionsFromUrl, setCurrentPage } from "./XxxQuestionsPageActions";
 import sharedStyles from "../../assets/styles/XxxSharedStyles.module.scss";
 import styles from "./XxxQuestionsPage.module.scss";
 
@@ -66,6 +66,7 @@ class XxxQuestionsPage extends Component {
       sort: "votes"
     };
     const url = baseUrl + "?" + this.getQueryString(requestParams);
+    this.props.setCurrentPage(requestParams.page);
     this.props.getQuestionsFromUrl(url);
   }
 
@@ -200,7 +201,8 @@ class XxxQuestionsPage extends Component {
 }
 
 const mapDispatchToProps = {
-  getQuestionsFromUrl
+  getQuestionsFromUrl,
+  setCurrentPage
 };
 
 const mapStateToProps = state => ({

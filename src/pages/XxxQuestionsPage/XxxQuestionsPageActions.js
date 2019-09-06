@@ -31,3 +31,8 @@ export const fetchQuestionsSuccess = data => ({
   type: actionTypes.FETCH_QUESTIONS_SUCCESS,
   payload: { data }
 });
+
+export const setCurrentPage = data => ({
+  type: actionTypes.SET_CURRENT_PAGE,
+  payload: { data }
+});
