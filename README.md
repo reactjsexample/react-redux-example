@@ -261,7 +261,7 @@ In this app, we have 3 reducers, plus the app reducer.
 We combine the reducers in the app reducer like this:
 
 ```
-const appReducer = combineReducers({
+const xxxAppReducer = combineReducers({
   answersPage,
   questionsPage,
   searchBox
