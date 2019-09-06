@@ -11,13 +11,23 @@ import XxxQuestionsPage from "../pages/XxxQuestionsPage/XxxQuestionsPage";
 function XxxApp() {
   return (
     <div className={styles.xxxApp}>
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router>
         <XxxHeader />
         <div>
           <Switch>
-            <Route exact path="/" component={XxxHomePage} />
-            <Route path="/answers/:id" component={XxxAnswersPage} />
-            <Route path="/questions" component={XxxQuestionsPage} />
+            <Route
+              exact
+              path={process.env.PUBLIC_URL + "/"}
+              component={XxxHomePage}
+            />
+            <Route
+              path={process.env.PUBLIC_URL + "/answers/:id"}
+              component={XxxAnswersPage}
+            />
+            <Route
+              path={process.env.PUBLIC_URL + "/questions"}
+              component={XxxQuestionsPage}
+            />
             <Route component={XxxPageNotFoundPage} />
           </Switch>
         </div>
