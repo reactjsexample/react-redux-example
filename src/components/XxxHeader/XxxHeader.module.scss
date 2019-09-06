@@ -1,12 +1,15 @@
+@import "../../assets/styles/partials/colors";
+
 .header {
   align-items: center;
-  background-color: dodgerblue;
+  background-color: $bg-color-header;
   display: flex;
   flex-direction: row;
   height: 4rem;
 }
 
 .headerTitle {
+  color: white;
   font-size: 1.2rem;
   font-weight: bold;
   width: 100%;

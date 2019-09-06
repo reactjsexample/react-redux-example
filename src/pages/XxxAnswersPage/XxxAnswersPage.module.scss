@@ -2,34 +2,34 @@
 
 .answerAccepted {
   background-color: $bg-color-accepted;
-  margin: .5rem;
+  margin: 0.5rem;
   overflow: scroll;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 .answerBody {
 }
 
 .answerCaption {
-  font-size: .8rem;
+  font-size: 0.8rem;
   font-style: italic;
 }
 
 .answerInfo {
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
 .answerNotAccepted {
   background-color: $bg-color-container;
-  margin: .5rem;
+  margin: 0.5rem;
   overflow: scroll;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 .answerQuestionContainer {
   background-color: $bg-color-container;
-  margin: .5rem;
-  padding: .5rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
 }
 
 .answersContainer {
@@ -39,20 +39,20 @@
 }
 
 .backToQuestions {
-  font-size: .8rem;
-  margin: .5rem;
+  font-size: 0.8rem;
+  margin: 0.5rem;
 }
 
 .questionBody {
 }
 
 .questionCaption {
-  font-size: .8rem;
+  font-size: 0.8rem;
   font-style: italic;
 }
 
 .questionInfo {
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
 .questionTitle {
