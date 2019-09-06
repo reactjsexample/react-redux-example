@@ -2,17 +2,34 @@
 
 **React Redux Example**. ReactJS Example App for React with Redux.
 
-Includes React Routing, React Fetch, React Nested API Calls, React SCSS, React CSS Modules.
-
-Uses the Stack Exchange API to search for questions and answers on **Stack Overflow**.
-
-React Best Practices. React Architecture for large scale applications.
+React Redux example is a more complex example of how to use React Redux in a large scale application.
 
 Created by **ReactJSExample** [https://github.com/reactjsexample](https://github.com/reactjsexample)
 
 Full source code available at [https://github.com/reactjsexample/react-redux-example](https://github.com/reactjsexample/react-redux-example)
 
-![react-redux-example-screen-shot](https://github.com/reactjsexample/react-redux-example/blob/master/src/assets/images/react-redux-example-screen-shot.png)
+## Running Example
+
+Click for running example: [react-redux-example](https://reactjsexample.github.io/react-redux-example)
+
+### Screen Shot
+
+![react-redux-example](https://github.com/reactjsexample/react-redux-example/blob/master/src/assets/images/react-redux-example.png)
+
+## Compare Same App Without Redux
+
+You can compare this app to the same app without Redux.
+
+This is a good way to see how to convert an existing React app to React Redux.
+
+- [react-example-app](https://github.com/reactjsexample/react-example-app)
+
+## Same App In Angular and Polymer
+
+Here is the same app written in Angular and Polymer:
+
+- [angular-9-example-app](https://github.com/angularexample/angular-9-example-app)
+- [polymer-3-example-app](https://github.com/polymerexample/polymer-3-example-app)
 
 ## Table of Contents
 
@@ -25,6 +42,9 @@ Full source code available at [https://github.com/reactjsexample/react-redux-exa
   - [How To Build For Production](#how-to-build-for-production)
 - [Software Libraries Used](#software-libraries-used)
 - [Installing The Libraries](#installing-the-libraries)
+- [React Redux Best Practices](#react-redux-best-practices)
+  - [Redux combineReducers](#redux-combinereducers)
+  - [Redux Selectors](#redux-selectors)
 
 ## About The Author
 
@@ -114,11 +134,13 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 These are the main packages used in this app:
 
-- ReactJS 16.8.4
-- React Redux 7.1.0
-- React Router 5.0.1
-- Node Sass
-- Material UI
+- react 16.9.0
+- react-redux 7.1.1
+- react-router-dom 5.0.1
+- redux 4.0.4
+- redux-thunk 2.3.0
+- node-sass 4.12.0
+- @material-ui/core 4.4.0
 
 For a complete list, see the [package.json](https://github.com/reactjsexample/react-redux-example/blob/master/package.json) file.
 For installation instructions, see [Installing The Libraries](#installing-the-libraries)
@@ -221,8 +243,89 @@ where it available during development, but not is not used during the build proc
 I use [JetBrains WebStorm](https://www.jetbrains.com/webstorm/) as my code editor,
 and have configured File Watchers that automatically run Prettier on file save.
 
-If you have downloaded any of my repositories,
-you will get the files in the **.idea** folder that contain the File Watchers
-so you will be ready to go.
+## React Redux Best Practices
+
+There are a number of design techniques used in this app that you will not see in my simple Redux example app.
+
+- [react-redux-simple-example](https://github.com/reactjsexample/react-redux-simple-example)
+
+### Redux combineReducers
+
+Using **combineReducers** is a best practice for large scale React Redux apps.
+
+It automatically adds a hierarchy to your central store.
+By addressing the child level, each reducer will have its own store.
+
+In this app, we have 3 reducers, plus the app reducer.
+
+We combine the reducers in the app reducer like this:
+
+```
+const appReducer = combineReducers({
+  answersPage,
+  questionsPage,
+  searchBox
+});
+```
+
+Now our store will have a child level that uses the same name that is given to the `combineReducers` function.
+
+So you access the store like this:
+
+`store.answersPage.isLoading`
+
+This is why we don't use a reducer name like "xxxAnswersPageReducer".
+
+So give your reducer the name you want to appear in the store.
+The main consideration is that it must be a unique name.
+
+### Redux Selectors
+
+Using Redux Selectors is a best practice for large scale React Redux apps.
+
+In the component source file, there are 2 key things we do in a Redux app.
+
+- mapStateToProps: Access to redux store properties
+- mapDispatchToProps: Access to redux action methods
+
+These two functions are connected to redux in your component export like this:
+
+```
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(XxxAnswersPage);
+
+```
+
+In `mapStateToProps`, we must provide the store address to each property that will be used.
+
+`store.answersPage.isLoading`
+
+This where we use our _Redux Selectors_.
+
+```
+const mapStateToProps = state => ({
+  answers: selectAnswers(state),
+  isError: selectIsError(state),
+  isLoading: selectIsLoading(state),
+  isQuestions: selectIsQuestions(state)
+});
+```
+
+The selectors are defined in the reducer file.
+
+```
+// Redux selectors
+export const selectAnswers = state => state.answersPage.answers;
+export const selectIsError = state => state.answersPage.isError;
+export const selectIsLoading = state => state.answersPage.isLoading;
+export const selectIsQuestions = state => state.questionsPage.isQuestions;
+```
+
+A best practice is to name each selector with the prefix "select".
+
+If we decide later to move the location of anything in the store,
+we can easily change just the selector.
 
 ---
