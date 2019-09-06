@@ -4,9 +4,10 @@ import { connect } from "react-redux";
 
 import {
   selectAnswers,
-  selectIsLoading,
-  selectIsError,
   selectIsEmpty,
+  selectIsError,
+  selectIsLoading,
+  selectIsQuestions,
   selectQuestion
 } from "./XxxAnswersPageReducer";
 import {
@@ -127,6 +128,9 @@ class XxxAnswersPage extends Component {
     if (!(this.props.isEmpty || this.props.isError || this.props.isLoading)) {
       pageView = (
         <div className={styles.answersContainer}>
+          {/*<div className="backToQuestions">*/}
+          {/*  <a href="#">Back to Questions</a>*/}
+          {/*</div>*/}
           <div className={styles.answerQuestionContainer}>
             <div className={styles.questionTitle}>
               {this.decodeHtmlEntities(this.props.question.title)}
@@ -208,6 +212,7 @@ const mapStateToProps = state => ({
   isEmpty: selectIsEmpty(state),
   isError: selectIsError(state),
   isLoading: selectIsLoading(state),
+  isQuestions: selectIsQuestions(state),
   question: selectQuestion(state)
 });
 

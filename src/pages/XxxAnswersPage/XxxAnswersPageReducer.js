@@ -85,4 +85,5 @@ export const selectAnswers = state => state.answersPage.answers;
 export const selectIsEmpty = state => state.answersPage.isEmpty;
 export const selectIsError = state => state.answersPage.isError;
 export const selectIsLoading = state => state.answersPage.isLoading;
+export const selectIsQuestions = state => state.questionsPage.isQuestions;
 export const selectQuestion = state => state.answersPage.question;

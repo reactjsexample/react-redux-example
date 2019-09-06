@@ -6,6 +6,7 @@ const initialState = {
   isError: false,
   isLoading: true,
   isMore: false,
+  isQuestions: false,
   questions: []
 };
 
@@ -18,6 +19,7 @@ const questionsPageReducer = (state = initialState, action) => {
         isError: false,
         isLoading: true,
         isMore: false,
+        isQuestions: false,
         questions: []
       };
     case actionType.FETCH_QUESTIONS_FAILURE:
@@ -27,6 +29,7 @@ const questionsPageReducer = (state = initialState, action) => {
         isError: true,
         isLoading: false,
         isMore: false,
+        isQuestions: false,
         questions: []
       };
     case actionType.FETCH_QUESTIONS_SUCCESS:
@@ -44,6 +47,7 @@ const questionsPageReducer = (state = initialState, action) => {
         isMore:
           action.payload.data.hasOwnProperty("has_more") &&
           action.payload.data.has_more,
+        isQuestions: !isEmpty,
         questions: !isEmpty ? action.payload.data.items : []
       };
     case actionType.SET_CURRENT_PAGE:
