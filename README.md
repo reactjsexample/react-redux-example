@@ -68,7 +68,7 @@ This is a good way to see how to convert an existing React app to React TypeScri
 
 - [react-typescript-example](https://github.com/reactjsexample/react-typescript-example)
 
-## Same App In Angular and Polymer
+## Same App In Angular or Polymer
 
 Here is the same app written in Angular and Polymer:
 
