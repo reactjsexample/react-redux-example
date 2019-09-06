@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
 import styles from "./XxxApp.module.scss";
 import XxxAnswersPage from "../pages/XxxAnswersPage/XxxAnswersPage";
@@ -15,19 +15,9 @@ function XxxApp() {
         <XxxHeader />
         <div>
           <Switch>
-            <Route
-              exact
-              path={process.env.PUBLIC_URL + "/"}
-              component={XxxHomePage}
-            />
-            <Route
-              path={process.env.PUBLIC_URL + "/answers/:id"}
-              component={XxxAnswersPage}
-            />
-            <Route
-              path={process.env.PUBLIC_URL + "/questions"}
-              component={XxxQuestionsPage}
-            />
+            <Route exact path="/" component={XxxHomePage} />
+            <Route path="/answers/:id" component={XxxAnswersPage} />
+            <Route path="/questions" component={XxxQuestionsPage} />
             <Route component={XxxPageNotFoundPage} />
           </Switch>
         </div>
