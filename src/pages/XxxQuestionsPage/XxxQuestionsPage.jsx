@@ -176,7 +176,7 @@ class XxxQuestionsPage extends Component {
                     <ChevronLeftIcon />
                   </IconButton>
                   <IconButton
-                    disabled={!this.props.isMorePages}
+                    disabled={!this.props.isMore}
                     onClick={this.handleNextPage}
                     href="#"
                     title="Go to Next Page"
