@@ -2,19 +2,20 @@ import * as actionTypes from "./XxxAnswersPageActionTypes";
 
 export const getAnswersFromUrl = url => {
   return async dispatch => {
+    let response = null;
     try {
       dispatch(fetchAnswers());
-      let response = await fetch(url);
+      response = await fetch(url);
       if (response.ok) {
         response = await response.json();
         dispatch(fetchAnswersSuccess(response));
       } else {
         dispatch(fetchAnswersFailure());
       }
-      return response;
     } catch (e) {
       dispatch(fetchAnswersFailure());
     }
+    return response;
   };
 };
 
@@ -22,7 +23,7 @@ export const fetchAnswers = () => ({
   type: actionTypes.FETCH_ANSWERS
 });
 
-export const fetchAnswersFailure = data => ({
+export const fetchAnswersFailure = () => ({
   type: actionTypes.FETCH_ANSWERS_FAILURE
 });
 
@@ -32,6 +33,7 @@ export const fetchAnswersSuccess = data => ({
 });
 
 export const getQuestionFromUrl = url => {
+  let response = null;
   return async dispatch => {
     try {
       dispatch(fetchQuestion());
@@ -42,11 +44,10 @@ export const getQuestionFromUrl = url => {
       } else {
         dispatch(fetchQuestionFailure());
       }
-      return response;
-    } catch (e) {
+    } catch {
       dispatch(fetchQuestionFailure());
-      return e;
     }
+    return response;
   };
 };
 
@@ -54,7 +55,7 @@ export const fetchQuestion = () => ({
   type: actionTypes.FETCH_QUESTION
 });
 
-export const fetchQuestionFailure = data => ({
+export const fetchQuestionFailure = () => ({
   type: actionTypes.FETCH_QUESTION_FAILURE
 });
 

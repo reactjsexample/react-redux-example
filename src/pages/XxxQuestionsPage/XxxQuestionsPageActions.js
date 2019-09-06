@@ -1,6 +1,7 @@
 import * as actionTypes from "./XxxQuestionsPageActionTypes";
 
 export const getQuestionsFromUrl = url => {
+  let response = null;
   return async dispatch => {
     try {
       dispatch(fetchQuestions());
@@ -11,11 +12,10 @@ export const getQuestionsFromUrl = url => {
       } else {
         dispatch(fetchQuestionsFailure());
       }
-      return response;
-    } catch (e) {
+    } catch {
       dispatch(fetchQuestionsFailure());
-      return e;
     }
+    return response;
   };
 };
 

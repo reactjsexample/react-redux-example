@@ -42,7 +42,7 @@ class XxxAnswersPage extends Component {
     this.questionId = this.props.match.params.id;
   }
 
-  getQuestion() {
+  async getQuestion() {
     this.setState({
       isEmpty: false,
       isError: false,
@@ -59,7 +59,8 @@ class XxxAnswersPage extends Component {
       sort: "votes"
     };
     const url = this.requestUrl + "?" + this.getQueryString(this.requestParams);
-    this.props.getQuestionFromUrl(url);
+    await this.props.getQuestionFromUrl(url);
+    this.getAnswers();
   }
 
   getAnswers() {
@@ -109,7 +110,7 @@ class XxxAnswersPage extends Component {
       pageView = (
         <div className={sharedStyles.pageMessageContainer}>
           <div className={sharedStyles.pageMessageError}>
-            Error Occurred Getting Questions
+            Error Occurred Getting Answers
           </div>
         </div>
       );
