@@ -11,7 +11,7 @@ import XxxQuestionsPage from "../pages/XxxQuestionsPage/XxxQuestionsPage";
 function XxxApp() {
   return (
     <div className={styles.xxxApp}>
-      <Router>
+      <Router basename={"/react-redux-example"}>
         <XxxHeader />
         <div>
           <Switch>

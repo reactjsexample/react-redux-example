@@ -147,7 +147,7 @@ class XxxQuestionsPage extends Component {
                 {this.props.questions.map(item => (
                   <li key={item.question_id}>
                     <a
-                      href={"/answers/" + item.question_id}
+                      href={"react-example-app/answers/" + item.question_id}
                       className={styles.dummy}
                       key={item.question_id}
                     >
